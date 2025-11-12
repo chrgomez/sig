@@ -1,0 +1,82 @@
+/* static/style.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+#map-container {
+    display: flex;
+    width: 100%;
+    height: 600px; /* Ajusta la altura según sea necesario */
+    border: 1px solid #ccc;
+}
+
+#map {
+    flex-grow: 1; /* El mapa ocupará todo el espacio disponible */
+    height: 100%;
+}
+
+#panel {
+    width: 300px; /* Ancho fijo para el panel lateral */
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-left: 1px solid #ccc;
+    overflow-y: auto; /* Scroll si el contenido es demasiado largo */
+}
+
+#panel h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+#layers-control label,
+#map-interactions label {
+    margin-left: 5px;
+}
+
+#map-info div {
+    margin-bottom: 5px;
+    font-size: 0.9em;
+}
+
+#legend-panel img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 5px;
+    border: 1px solid #eee;
+}
+
+#drawing-attributes {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-top: 15px;
+    background-color: #f2f2f2;
+}
+
+#drawing-attributes label {
+    display: inline-block;
+    width: 80px;
+    margin-bottom: 5px;
+}
+
+#drawing-attributes input[type="text"],
+#drawing-attributes select {
+    width: calc(100% - 90px);
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+}
+
+#drawing-attributes button {
+    padding: 8px 12px;
+    margin-right: 5px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#drawing-attributes button:hover {
+    background-color: #0056b3;
+}

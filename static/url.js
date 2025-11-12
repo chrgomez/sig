@@ -1,0 +1,1 @@
+export const URL_OGC = 'http://localhost:9090/geoserver/ows';
