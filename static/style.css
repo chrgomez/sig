@@ -80,3 +80,359 @@ body {
 #drawing-attributes button:hover {
     background-color: #0056b3;
 }
+
+/* Estilos para la Ventana Modal de Resultados */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    z-index: 2000; /* Encima del mapa */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-height: 80%;
+    overflow-y: auto;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+
+.close-modal {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-modal:hover,
+.close-modal:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Estilos para el Modal (Fondo oscuro) */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed; 
+    z-index: 2000; /* Encima del mapa */
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    background-color: rgba(0,0,0,0.5); /* Fondo negro semitransparente */
+}
+
+/* Contenido del Modal (Caja blanca) */
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto; 
+    padding: 0;
+    border: 1px solid #888;
+    width: 80%; 
+    max-height: 80vh; /* Altura máxima */
+    overflow-y: auto; /* Scroll si es muy largo */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+
+.modal-header {
+    padding: 15px;
+    background-color: #007bff; /* Azul */
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.close-modal {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-modal:hover {
+    color: #ddd;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+
+/* =========================================
+   ESTILOS DEL MODAL (VENTANA EMERGENTE)
+   ========================================= */
+
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 2000; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    background-color: rgba(0, 0, 0, 0.6); /* Fondo un poco más oscuro */
+    backdrop-filter: blur(3px); /* Efecto borroso en el fondo (moderno) */
+}
+
+.modal-content {
+    background-color: #ffffff;
+    margin: 3% auto; /* Un poco más arriba */
+    padding: 0;
+    border: none;
+    width: 90%; /* Más ancho para aprovechar la pantalla */
+    max-height: 85vh; 
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5); /* Sombra suave y elegante */
+    border-radius: 8px; /* Bordes redondeados */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Para que el header no se salga del borde redondeado */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Cabecera del Modal */
+.modal-header {
+    padding: 15px 20px;
+    background-color: #2c3e50; /* Gris azulado oscuro (muy profesional) */
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #34495e;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.close-modal {
+    color: #ecf0f1;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close-modal:hover {
+    color: #e74c3c; /* Rojo al pasar el mouse */
+}
+
+/* Cuerpo del Modal */
+.modal-body {
+    padding: 20px;
+    overflow-y: auto; /* Scroll vertical si hace falta */
+    background-color: #f8f9fa;
+}
+
+.layer-title {
+    color: #2c3e50;
+    font-size: 1.1em;
+    border-left: 5px solid #007bff; /* Línea azul a la izquierda */
+    padding-left: 10px;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+/* =========================================
+   ESTILOS DEL MODAL (CONTENEDOR PRINCIPAL)
+   ========================================= */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Fondo más sutil */
+    backdrop-filter: blur(2px);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 3% auto;
+    width: 95%;
+    height: 85vh;
+    border-radius: 4px; /* Bordes poco redondeados como la imagen */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    font-family: 'Segoe UI', Roboto, "Helvetica Neue", Arial, sans-serif;
+    border-top: 4px solid #0d6efd; /* Detalle azul arriba (opcional, estilo admin) */
+}
+
+/* =========================================
+   CABECERA DEL MODAL (ESTILO IGUAL AL INDEX)
+   ========================================= */
+
+.modal-header {
+    /* El mismo degradado azul que tu header.navbar */
+    background: linear-gradient(90deg, #0d6efd, #0a58ca);
+    color: white;
+    padding: 15px 20px;
+    
+    /* Alineación */
+    display: flex;
+    justify-content: space-between; /* Título a la izq, X a la der */
+    align-items: center;
+    
+    /* Bordes superiores redondeados para coincidir con el modal */
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom: none; /* Sin borde inferior, el color lo separa */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Misma sombra que el header */
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: white; /* Texto blanco */
+}
+
+/* Botón de cerrar (X) */
+.close-modal {
+    color: white; /* X blanca */
+    opacity: 0.8; /* Un poco transparente */
+    font-size: 1.8rem;
+    font-weight: normal;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    line-height: 1;
+    transition: opacity 0.2s;
+}
+
+.close-modal:hover {
+    opacity: 1; /* Totalmente blanco al pasar el mouse */
+    text-shadow: 0 0 5px rgba(255,255,255,0.5); /* Pequeño brillo */
+}
+
+.modal-body {
+    padding: 0; /* Quitamos padding general para que los tabs toquen los bordes */
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+}
+
+/* =========================================
+   NUEVO ESTILO DE TABS (COMO TU IMAGEN)
+   ========================================= */
+.tabs-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.tabs-nav {
+    display: flex;
+    padding: 0 20px; /* Margen lateral */
+    border-bottom: 1px solid #dee2e6; /* Línea gris fina continua */
+    background-color: #fff;
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent; /* Borde invisible para reservar espacio */
+    padding: 15px 20px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #6c757d; /* Gris para inactivos */
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-bottom: -1px; /* Para pisar la línea gris del contenedor */
+}
+
+.tab-btn:hover {
+    color: #0d6efd; /* Azul al pasar el mouse */
+    background-color: rgba(13, 110, 253, 0.03);
+}
+
+/* ESTADO ACTIVO: Texto azul y línea inferior azul */
+.tab-btn.active {
+    color: #0d6efd;
+    border-bottom: 3px solid #0d6efd; 
+}
+
+.tab-content {
+    padding: 20px 25px;
+    overflow: hidden;
+    flex: 1;
+    display: none; /* Se controla por JS */
+}
+
+/* =========================================
+   TABLA LIMPIA (CLEAN TABLE STYLE)
+   ========================================= */
+.table-responsive {
+    height: 100%;
+    overflow: auto;
+    border: 1px solid #f0f0f0; /* Borde muy sutil alrededor de la tabla */
+    border-radius: 4px;
+}
+
+.result-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 800px;
+}
+
+/* Encabezados */
+.result-table thead th {
+    position: sticky;
+    top: 0;
+    background-color: #f8f9fa; /* Gris muy claro, casi blanco */
+    color: #6c757d; /* Texto gris oscuro */
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 16px;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6;
+    z-index: 10;
+}
+
+/* Celdas */
+.result-table td {
+    padding: 14px 16px;
+    color: #212529;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #e9ecef; /* Línea horizontal suave */
+    vertical-align: middle;
+}
+
+/* Quitamos bordes verticales para dar el look "aireado" de la imagen */
+.result-table th, 
+.result-table td {
+    border-left: none;
+    border-right: none;
+}
+
+/* Efecto Hover en filas */
+.result-table tbody tr:hover {
+    background-color: #fdfdfd; /* Cambio muy sutil */
+}
+
+/* Opcional: Primera columna azul (como el ID en tu imagen) */
+.result-table td:first-child {
+    color: #0d6efd;
+    font-weight: 500;
+}
