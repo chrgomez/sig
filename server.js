@@ -35,6 +35,8 @@ const consultaController = createConsultaController(pool);
 // Usamos el prefijo /api/ para evitar conflictos con archivos
 app.get('/api/consulta', consultaController.handleConsulta);
 app.post('/api/features', consultaController.addFeature); 
+// NUEVA RUTA PARA LAS PREGUNTAS
+app.get('/api/preguntas/:id', consultaController.handlePreguntas);
 
 // ==================================================================
 // 3. ARCHIVOS ESTÁTICOS (Siempre al final)

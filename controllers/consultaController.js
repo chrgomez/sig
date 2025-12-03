@@ -52,9 +52,42 @@ export const createConsultaController = (pool) => {
             res.status(500).json({ error: 'Error en base de datos: ' + error.message });
         }
     };
+	
+	// Nueva función para las preguntas predefinidas
+    const handlePreguntas = async (req, res) => {
+        const { id } = req.params; // Recibimos el número de pregunta (1, 2, 3, 4)
+        let query = "";
+
+        // Asignamos la SQL según la opción elegida
+        switch (id) {
+            case '1': // Km de traza
+                query = `SELECT ROUND((SUM(ST_Length(ST_Intersection(r.geom, p.geom)::geography)) / 1000)::numeric, 2) as valor FROM "Red_Vial" r, "Provincias" p WHERE p.provincia ILIKE '%Chaco%' AND r.nro_ruta = '11' AND r.administra = 'Nacional';`;
+                break;
+            case '2': // Población 0-10km
+                query = `SELECT COALESCE(SUM(canthab), 0) as valor FROM "Localidades" WHERE ST_DWithin(geom::geography, (SELECT ST_Union(ST_Intersection(r.geom, p.geom)) FROM "Red_Vial" r, "Provincias" p WHERE r.nro_ruta = '11' AND p.provincia ILIKE '%Chaco%'  AND r.administra = 'Nacional')::geography, 10000);`;
+                break;
+            case '3': // Población 10-20km
+                query = `SELECT COALESCE(SUM(canthab), 0) as valor FROM "Localidades" WHERE ST_DWithin(geom::geography, (SELECT ST_Union(ST_Intersection(r.geom, p.geom)) FROM "Red_Vial" r, "Provincias" p WHERE r.nro_ruta = '11' AND p.provincia ILIKE '%Chaco%' AND r.administra = 'Nacional')::geography, 20000) AND NOT ST_DWithin(geom::geography, (SELECT ST_Union(ST_Intersection(r.geom, p.geom)) FROM "Red_Vial" r, "Provincias" p WHERE r.nro_ruta ='11' AND p.provincia ILIKE '%Chaco%' AND r.administra = 'Nacional')::geography, 10000);`;
+                break;
+            case '4': // Puentes
+                query = `SELECT COUNT(*) as cantidad, STRING_AGG(pu.nombre, ', ') as detalle FROM "Puente_Red_Vial_Puntos" pu, "Red_Vial" r, "Provincias" p WHERE r.nro_ruta = '11' AND p.provincia ILIKE '%Chaco%' AND r.administra = 'Nacional' AND ST_Intersects(r.geom, p.geom) AND ST_DWithin(pu.geom::geography, r.geom::geography, 50);`;
+                break;
+            default:
+                return res.status(400).json({ error: "Opción no válida" });
+        }
+
+        try {
+            const result = await pool.query(query);
+            res.json(result.rows[0]);
+        } catch (error) {
+            console.error("Error en consulta SQL:", error);
+            res.status(500).json({ error: "Error calculando datos." });
+        }
+    };
 
     return {
         handleConsulta,
-        addFeature
+        addFeature,
+		handlePreguntas 
     };
 };

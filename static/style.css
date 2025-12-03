@@ -436,3 +436,37 @@ body {
     color: #0d6efd;
     font-weight: 500;
 }
+
+#layers-control {
+    /* Altura máxima: aprox el 35% de la pantalla o un valor fijo como 300px */
+    max-height: 25vh; 
+    
+    /* Activa el scroll vertical si se pasa de la altura */
+    overflow-y: auto; 
+    
+    /* Estética: un borde suave para que parezca una caja contenida */
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #fff;
+    margin-bottom: 15px; /* Espacio antes del siguiente título */
+}
+
+/* Opcional: Personalizar la barra de scroll para que sea más fina y elegante */
+#layers-control::-webkit-scrollbar {
+    width: 6px;
+}
+
+#layers-control::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+    border-radius: 3px;
+}
+
+#layers-control::-webkit-scrollbar-thumb {
+    background: #ccc; 
+    border-radius: 3px;
+}
+
+#layers-control::-webkit-scrollbar-thumb:hover {
+    background: #0d6efd; /* Se pone azul al pasar el mouse */
+}

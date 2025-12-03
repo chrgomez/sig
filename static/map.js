@@ -5,11 +5,55 @@ import { URL_OGC } from './url.js';
 // CONFIGURACIÓN DE CAPAS
 // =========================================================================
 const layersConfig = [
-    { id: 'red_vial', title: 'Red Vial', workspaceLayer: 'Red_Vial', visible: false },
-    { id: 'edif_educacion', title: 'Edificios de Educación', workspaceLayer: 'Edif_Educacion', visible: false },
-    { id: 'espejo_de_agua_Hid', title: 'Espejo de Agua', workspaceLayer: 'Espejo_de_Agua_Hid', visible: false },
-    { id: 'localidades', title: 'Localidades', workspaceLayer: 'Localidades', visible: false },
-    { id: 'curso_de_agua_hid', title: 'Curso de Agua', workspaceLayer: 'Curso_de_Agua_Hid', visible: false },
+	{ id: 'actividades_agropecuarias', title: 'Actividades Agropecuarias', workspaceLayer: 'Actividades_Agropecuarias', visible: false },
+	{ id: 'actividades_economicas', title: 'Actividades Economicas', workspaceLayer: 'Actividades_Economicas', visible: false },
+	{ id: 'complejo_de_energia_ene', title: 'Complejo de Energia', workspaceLayer: 'Complejo_de_Energia_Ene', visible: false },
+	{ id: 'curso_de_agua_hid', title: 'Curso de Agua', workspaceLayer: 'Curso_de_Agua_Hid', visible: false },
+	{ id: 'curvas_de_nivel', title: 'Curvas de Nivel', workspaceLayer: 'Curvas_de_Nivel', visible: false },
+	{ id: 'edif_turisticos', title: 'Edificios de Turisticos', workspaceLayer: 'Edif_Construcciones_Turisticas', visible: false },
+	{ id: 'edif_deportes', title: 'Edificios de Deportes', workspaceLayer: '	Edif_Depor_y_Esparcimiento', visible: false },
+	{ id: 'edif_educacion', title: 'Edificios de Educación', workspaceLayer: 'Edif_Educacion', visible: false },
+	{ id: 'edif_religiosos', title: 'Edificios de Religiosos', workspaceLayer: 'Edif_Religiosos', visible: false },
+	{ id: 'edif_publicos', title: 'Edificios de Publicos', workspaceLayer: 'Edificio_Publico_IPS', visible: false },
+	{ id: 'edif_salud', title: 'Edificios de Salud', workspaceLayer: 'Edificio_de_Salud_IPS', visible: false },
+	{ id: 'edif_seguridad', title: 'Edificios de Seguridad', workspaceLayer: 'Edificio_de_Seguridad_IPS', visible: false },
+	{ id: 'edif_ferroviarios', title: 'Edificios de Ferroviarios', workspaceLayer: 'Edificios_Ferroviarios', visible: false },
+	{ id: 'ejido', title: 'Ejido', workspaceLayer: 'Ejido', visible: false },
+    { id: 'espejo_de_agua_hid', title: 'Espejo de Agua', workspaceLayer: 'Espejo_de_Agua_Hid', visible: false },
+	{ id: 'estructuras_portuarias', title: 'Estructuras Portuarias', workspaceLayer: 'Estructuras_portuarias', visible: false },
+	{ id: 'infra_agro', title: 'Infraestructura Aeroportuaria', workspaceLayer: 'Infraestructura_Aeroportuaria_Punto', visible: false },
+	{ id: 'infra_hidro', title: 'Infraestructura Hidro', workspaceLayer: 'Infraestructura_Hidro', visible: false },
+	{ id: 'isla', title: 'Isla', workspaceLayer: 'Isla', visible: false },
+	{ id: 'limite_politico', title: 'Limite Politico Administrativo', workspaceLayer: 'Limite_Politico_Administrativo_Lim', visible: false },
+	{ id: 'localidades', title: 'Localidades', workspaceLayer: 'Localidades', visible: false },
+	{ id: 'lineas_conduccion', title: 'Líneas de Conducción', workspaceLayer: 'Líneas_de_Conducción_Ene', visible: false },
+	{ id: 'marcas_senales', title: 'Marcas y Señales', workspaceLayer: 'Marcas_y_Señales', visible: false },
+	{ id: 'muro_embalse', title: 'Muro Embalse', workspaceLayer: 'Muro_Embalse', visible: false },
+	{ id: 'obra_portuaria', title: 'Obra Portuaria', workspaceLayer: 'Obra_Portuaria', visible: false },
+	{ id: 'obra_comunicacion', title: 'Obra de Comunicación', workspaceLayer: 'Obra_de_Comunicación', visible: false },
+	{ id: 'otras_edificaciones', title: 'Otras Edificaciones', workspaceLayer: '	Otras_Edificaciones', visible: false },
+	{ id: 'pais_lim', title: 'Pais Lim', workspaceLayer: 'Pais_Lim', visible: false },
+	{ id: 'provincias', title: 'Provincias', workspaceLayer: 'Provincias', visible: false },
+	{ id: 'puente_red_vial', title: 'Puente Red Vial Puntos', workspaceLayer: 'Puente_Red_Vial_Puntos', visible: false },
+	{ id: 'puntos_alturas_topo', title: 'Puntos Altura Topograficas', workspaceLayer: 'Puntos_de_Alturas_Topograficas', visible: false },
+	{ id: 'puntos_terreno', title: 'Puntos del Terreno', workspaceLayer: 'Puntos_del_Terreno', visible: false },
+	{ id: 'red_vial', title: 'Red Vial', workspaceLayer: 'Red_Vial', visible: false },
+	{ id: 'red_ferroviaria', title: 'Red Ferroviaria', workspaceLayer: 'Red_ferroviaria', visible: false },
+	{ id: 'salvado_de_obstaculo', title: 'Salvado de Obstaculo', workspaceLayer: 'Salvado_de_Obstaculo', visible: false },
+	{ id: 'senalizaciones', title: 'Señalizaciones', workspaceLayer: 'Señalizaciones', visible: false },
+	{ id: 'sue_costero', title: 'Sue Costero', workspaceLayer: 'Sue_Costero', visible: false },
+	{ id: 'sue_hidromorfologico', title: 'Sue Hidromorfologico', workspaceLayer: 'Sue_Hidromorfologico', visible: false },
+	{ id: 'sue_no_consolidado', title: 'Sue No Consolidado', workspaceLayer: 'Sue_No_Consolidado', visible: false },
+	{ id: 'sue_congelado', title: 'Sue Congelado', workspaceLayer: 'Sue_congelado', visible: false },
+	{ id: 'sue_consolidado', title: 'Sue Consolidado', workspaceLayer: 'Sue_consolidado', visible: false },
+	{ id: 'veg_arborea', title: 'Veg Arborea', workspaceLayer: 'Veg_Arborea', visible: false },
+	{ id: 'veg_arbustiva', title: 'Veg Arbustiva', workspaceLayer: 'Veg_Arbustiva', visible: false },
+	{ id: 'veg_cultivos', title: 'Veg Cultivos', workspaceLayer: 'Veg_Cultivos', visible: false },
+	{ id: 'veg_suelo_desnudo', title: 'Veg Suelo Desnudo', workspaceLayer: 'Veg_Suelo_Desnudo', visible: false },
+	{ id: 'vias_secundarias', title: 'Vias Secundarias', workspaceLayer: 'Vias_Secundarias', visible: false },
+	{ id: 'veg_hidrofila', title: 'Veg Hidrofila', workspaceLayer: 'veg_Hidrofila', visible: false },
+	
+    
     
     // IMPORTANTE: Agregamos esta capa VECTORIAL para que funcione la herramienta de DIBUJO.
     // Si tienes una capa real en BD, cambia 'url' por tu endpoint WFS o GeoJSON local.
@@ -480,7 +524,26 @@ function performGetFeatureInfo(geometry, type) {
             contentHtml += `<table class="result-table">`;
 
             const firstProps = res.features[0].properties;
-            const ignoredKeys = ['bbox', 'the_geom', 'geom', 'gid', 'id', 'objectid']; 
+            // LISTA DE COLUMNAS A IGNORAR (Campos técnicos, metadatos y códigos internos)
+            const ignoredKeys = [
+                // Geometría e IDs
+                'bbox', 'the_geom', 'geom', 'gid', 'id', 'objectid', 
+                
+                // --- BASURA CAD (Lo que viste en la imagen) ---
+                'igds_style', 'igds_type', 'igds_weigh', 'igds_weight', 
+                'igds_color', 'igds_level', 'rotation', 'group', 'cell_name',
+                'signo', 'entidad',
+                
+                // Metadatos administrativos irrelevantes
+                'fuente', 'operador', 'dataset', 'responsabl', 'cargo', 
+                'progreso', 't_act', 'actualizac', 'ac', 'administra',
+                
+                // Datos de proyección técnica
+                'coord', 'coord_sp', 'sp', 'datum',
+                
+                // Códigos numéricos redundantes
+                'fclass', 'coddepto', 'codloc', 'link'
+            ];  
             const headers = Object.keys(firstProps).filter(k => !ignoredKeys.includes(k.toLowerCase()));
 
             contentHtml += `<thead><tr>`;
@@ -690,6 +753,78 @@ cancelDrawBtn.onclick = function() {
     featureNameInput.value = '';
     drawnFeature = null;
 };
+
+// =========================================================
+// LÓGICA PARA EL MODAL DE CONSULTAS MINISTERIO
+// =========================================================
+const btnConsultas = document.getElementById('btnConsultasMinisterio');
+const modalConsultas = document.getElementById('modalConsultas');
+const closeConsultas = document.getElementById('closeModalConsultas');
+const selectPregunta = document.getElementById('selectPregunta');
+const divResultado = document.getElementById('resultadoConsulta');
+
+// Abrir Modal
+if(btnConsultas) {
+    btnConsultas.onclick = function() {
+        modalConsultas.style.display = "block";
+    }
+}
+
+// Cerrar Modal
+if(closeConsultas) {
+    closeConsultas.onclick = function() {
+        modalConsultas.style.display = "none";
+        // Resetear formulario
+        selectPregunta.value = "";
+        divResultado.style.display = "none";
+    }
+}
+
+// Lógica al seleccionar una pregunta
+selectPregunta.addEventListener('change', async function() {
+    const idPregunta = this.value;
+    if(!idPregunta) return;
+
+    // Mostrar "Cargando..."
+    divResultado.style.display = "block";
+    divResultado.innerHTML = '<div style="text-align:center; color:#666;">Calculando datos, por favor espere...</div>';
+
+    try {
+        const response = await fetch(`/api/preguntas/${idPregunta}`);
+        const data = await response.json();
+
+        if (response.ok) {
+            let htmlRespuesta = "";
+            
+            // Formatear respuesta según la pregunta
+            if (idPregunta === '1') {
+                htmlRespuesta = `<h4 style="color:#0d6efd;">Longitud de Traza</h4>
+                                 <p style="font-size:1.5em;">${data.valor} km</p>`;
+            } else if (idPregunta === '2' || idPregunta === '3') {
+                htmlRespuesta = `<h4 style="color:#0d6efd;">Población Afectada</h4>
+                                 <p style="font-size:1.5em;">${data.valor} habitantes</p>`;
+            } else if (idPregunta === '4') {
+                htmlRespuesta = `<h4 style="color:#0d6efd;">Puentes en la traza</h4>
+                                 <p><strong>Cantidad:</strong> ${data.cantidad}</p>
+                                 <p><strong>Nombres:</strong> ${data.detalle || 'Sin nombres registrados'}</p>`;
+            }
+
+            divResultado.innerHTML = htmlRespuesta;
+        } else {
+            divResultado.innerHTML = `<p style="color:red;">Error: ${data.error}</p>`;
+        }
+    } catch (error) {
+        divResultado.innerHTML = `<p style="color:red;">Error de conexión con el servidor.</p>`;
+    }
+});
+
+// Cerrar si click afuera (para ambos modales)
+window.onclick = function(event) {
+    if (event.target == modalConsultas) {
+        modalConsultas.style.display = "none";
+    }
+    // ... mantener lógica del otro modal si existe ...
+}
 
 // =========================================================================
 // INICIO
