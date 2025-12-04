@@ -84,10 +84,42 @@ export const createConsultaController = (pool) => {
             res.status(500).json({ error: "Error calculando datos." });
         }
     };
+	
+	// NUEVA FUNCIÓN: Obtener los dibujos guardados como GeoJSON
+    const getDibujos = async (req, res) => {
+        try {
+            // Seleccionamos id, nombre y convertimos la geometría a GeoJSON
+            const query = `
+                SELECT id, nombre, ST_AsGeoJSON(geom) as geometry 
+                FROM capa_dibujo
+            `;
+            const result = await pool.query(query);
+
+            // Armamos la estructura FeatureCollection que pide OpenLayers
+            const features = result.rows.map(row => ({
+                type: "Feature",
+                properties: { 
+                    id: row.id, 
+                    name: row.nombre 
+                },
+                geometry: JSON.parse(row.geometry) // Convertir string a objeto JSON
+            }));
+
+            res.json({
+                type: "FeatureCollection",
+                features: features
+            });
+
+        } catch (error) {
+            console.error("Error al obtener dibujos:", error);
+            res.status(500).json({ error: "Error al cargar la capa de dibujos." });
+        }
+    };
 
     return {
         handleConsulta,
         addFeature,
-		handlePreguntas 
+		handlePreguntas,
+		getDibujos
     };
 };

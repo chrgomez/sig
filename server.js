@@ -37,6 +37,8 @@ app.get('/api/consulta', consultaController.handleConsulta);
 app.post('/api/features', consultaController.addFeature); 
 // NUEVA RUTA PARA LAS PREGUNTAS
 app.get('/api/preguntas/:id', consultaController.handlePreguntas);
+// NUEVA RUTA PARA LEER LA CAPA DE DIBUJO
+app.get('/api/features', consultaController.getDibujos); 
 
 // ==================================================================
 // 3. ARCHIVOS ESTÁTICOS (Siempre al final)

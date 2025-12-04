@@ -52,6 +52,7 @@ const layersConfig = [
 	{ id: 'veg_suelo_desnudo', title: 'Veg Suelo Desnudo', workspaceLayer: 'Veg_Suelo_Desnudo', visible: false },
 	{ id: 'vias_secundarias', title: 'Vias Secundarias', workspaceLayer: 'Vias_Secundarias', visible: false },
 	{ id: 'veg_hidrofila', title: 'Veg Hidrofila', workspaceLayer: 'veg_Hidrofila', visible: false },
+	{ id: 'capa_dibujo', title: 'Mis Dibujos', visible: false, isVector: true, url: '/api/features' },
 	
     
     
@@ -60,7 +61,7 @@ const layersConfig = [
     // Aquí la dejo vacía inicialmente para que puedas dibujar sobre ella.
     { 
         id: 'capa_dibujo', 
-        title: 'Capa de Dibujo (Vector)', 
+        title: 'Capa de Dibujo', 
         visible: true, 
         isVector: true, 
         url: null // null = capa vacía en memoria para empezar
@@ -70,7 +71,7 @@ const layersConfig = [
 const wmsLayers = [];
 const vectorLayers = {}; 
 
-// Capa base del IGN
+/*// Capa base del IGN
 const baseLayer = new ol.layer.Tile({
     title: "Base Map IGN",
     source: new ol.source.TileWMS({
@@ -78,6 +79,21 @@ const baseLayer = new ol.layer.Tile({
         params: { 'LAYERS': 'ign:provincia', 'VERSION': '1.3.0' },
         serverType: 'geoserver'
     })
+});*/
+
+// Capa base: Esri World Imagery (Satélite)
+/*const baseLayer = new ol.layer.Tile({
+    title: "Satélite (Esri)",
+    source: new ol.source.XYZ({
+        url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+        attributions: 'Tiles © Esri'
+    })
+});*/
+
+// Capa base: OpenStreetMap (Estilo Google Maps / Calles)
+const baseLayer = new ol.layer.Tile({
+    title: "Mapa Base (OSM)",
+    source: new ol.source.OSM()
 });
 
 // Crear las capas
@@ -127,21 +143,89 @@ layersConfig.forEach(config => {
 });
 
 // =========================================================================
+// DEFINICIÓN DE MAPAS BASE
+// =========================================================================
+
+// 1. OpenStreetMap (Visible por defecto)
+const baseOSM = new ol.layer.Tile({
+    title: "Mapa Base (OSM)",
+    visible: true, // <--- ESTE INICIA VISIBLE
+    source: new ol.source.OSM()
+});
+
+// 2. Satélite Esri (Oculto)
+const baseEsri = new ol.layer.Tile({
+    title: "Satélite (Esri)",
+    visible: false,
+    source: new ol.source.XYZ({
+        url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+        attributions: 'Tiles © Esri'
+    })
+});
+
+// 3. IGN Argenitna (Oculto)
+const baseIGN = new ol.layer.Tile({
+    title: "Base Map IGN",
+    visible: false,
+    source: new ol.source.TileWMS({
+        url: 'https://wms.ign.gob.ar/geoserver/ows',
+        params: { 'LAYERS': 'ign:provincia', 'VERSION': '1.3.0' },
+        serverType: 'geoserver'
+    })
+});
+
+// Agrupamos las bases en un objeto para acceder fácil luego
+const baseLayersGroup = {
+    'osm': baseOSM,
+    'esri': baseEsri,
+    'ign': baseIGN
+};
+
+// =========================================================================
 // INICIALIZACIÓN DEL MAPA
 // =========================================================================
 const map = new ol.Map({
     target: 'map',
-    // Agregamos ScaleLine para tener la barra de escala visual (funcionalidad requerida)
     controls: ol.control.defaults.defaults().extend([
-        new ol.control.ScaleLine({ units: 'metric' }) 
+        new ol.control.ScaleLine({ units: 'metric', bar: true, steps: 4, text: true, minWidth: 140 }),
+        new ol.control.Rotate({ autoHide: false, tipLabel: 'Restablecer Norte' })
     ]),
-    layers: [baseLayer, ...wmsLayers],
+    // IMPORTANTE: Agregamos las 3 bases al principio del array
+    layers: [
+        baseOSM, 
+        baseEsri, 
+        baseIGN, 
+        ...wmsLayers // Tus capas operativas van encima
+    ],
     view: new ol.View({
         projection: 'EPSG:4326',
-        center: [-59, -27.5],
-        zoom: 4
+        center: [-60.0, -26.5],
+        zoom: 7
     })
 });
+
+// =========================================================================
+// LÓGICA DE CAMBIO DE MAPA BASE
+// =========================================================================
+const baseMapRadios = document.getElementsByName('baseMap');
+
+for (let radio of baseMapRadios) {
+    radio.addEventListener('change', function() {
+        const selectedValue = this.value; // 'osm', 'esri' o 'ign'
+        
+        // Recorremos todas las bases
+        for (let key in baseLayersGroup) {
+            // Si la clave coincide con el radio seleccionado, visible = true
+            // Si no, visible = false
+            if (key === selectedValue) {
+                baseLayersGroup[key].setVisible(true);
+            } else {
+                baseLayersGroup[key].setVisible(false);
+            }
+        }
+    });
+}
+
 
 // Referencias al DOM
 const layersControl = document.getElementById('layers-control');
@@ -725,11 +809,17 @@ saveFeatureBtn.onclick = async function () {
         
         const data = await res.json();
         if (res.ok) {
-            alert('Guardado OK: ' + data.message);
+            alert('Guardado exitosamente: ' + data.message);
             
-            // Si la capa destino está en el mapa, la refrescamos
+            /*// Si la capa destino está en el mapa, la refrescamos
             if (vectorLayers[layerId]) {
                 vectorLayers[layerId].getSource().refresh();
+            }*/
+			// Buscamos la capa por su ID 'capa_dibujo'
+            if (vectorLayers['capa_dibujo']) {
+                // .clear() borra lo viejo y .refresh() pide los datos de nuevo al servidor
+                vectorLayers['capa_dibujo'].getSource().clear();
+                vectorLayers['capa_dibujo'].getSource().refresh();
             }
             
             // Volver a navegación
